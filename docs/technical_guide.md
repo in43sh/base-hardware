@@ -345,7 +345,7 @@ Lives in [lib/cart.ts](lib/cart.ts); mutations exposed via [app/actions/cart.ts]
 
 [lib/orders.ts](lib/orders.ts) + [app/actions/orders.ts](app/actions/orders.ts). `placeOrder(checkout)` requires a session and a non-empty cart, computes subtotal, shipping, tax and total with `computeTotals` in [lib/pricing.ts](lib/pricing.ts) (whole cents; tax is 8% of the goods only; Standard delivery is free and Express is $12.99), then runs a **single transaction** that: (1) decrements each product's `stock` atomically via `UPDATE … SET stock = stock - qty WHERE id = ? AND stock >= qty` — a row only updates while enough remains, so concurrent checkouts can't oversell; (2) inserts the order **as `status='pending'`** (no payment is taken) with the totals, delivery method and address; (3) snapshots line prices into `order_items`. If any line is short, an `OutOfStockError` rolls the whole transaction back and `placeOrder` returns `{ ok: false, reason: "out_of_stock", items }` — the cart is left intact and `placeOrderAction` redirects to `/cart`, where the page flags the short lines from live stock. `placeOrderAction` validates the form again with `checkoutSchema` before calling `placeOrder`, because the browser check can be bypassed, and never takes totals from the browser. On success the cart is cleared. `getOrder(id)` is **ownership-checked** (`WHERE id = … AND user_id = …`) so users can't read others' orders.
 
-> **No real payment processing exists.** `placeOrder` writes every order as `pending`; nothing ever sets `paid`. Real payments (e.g. Stripe) + the accompanying webhooks/emails are planned future work (§17).
+> **No real payment processing exists.** `placeOrder` writes every order as `pending`; nothing ever sets `paid`. Real payments (Stripe) are designed in [stripe_plan.md](stripe_plan.md) and not built yet; the accompanying emails are Milestone 4 (§17).
 >
 > See [walkthrough.md — Checkout](walkthrough.md) for an end-to-end trace including the stock-check transaction.
 
@@ -549,7 +549,7 @@ Local values go in `.env.local` (loaded automatically by Next at runtime, and ex
 
 ## 17. Future Work
 
-1. **Real payments.** Orders are written as `pending` (no payment is taken). Add a payment provider (e.g. Stripe) and set `paid` when it confirms payment. This is the next major piece.
+1. **Real payments.** Orders are written as `pending` (no payment is taken). Add Stripe and set `paid` when its webhook confirms payment. This is the next major piece; see [stripe_plan.md](stripe_plan.md).
 2. **Add-to-cart stock awareness.** Done: stock is shown on the PDP, cards, and cart, and quantities are capped up front (see the stock pitfall above).
 3. **Order lifecycle + admin order management.** Wire `shipped`/`delivered`/`cancelled` transitions and an admin UI to drive them.
 4. **Background work to accompany payments.** Payment webhooks and transactional email (order confirmations) — none exist today.

@@ -66,6 +66,7 @@ Start here:
 - [walkthrough.md](docs/walkthrough.md) — annotated end-to-end traces of each major feature.
 - [testing.md](docs/testing.md) — test layout, how to run each suite, and how to add tests.
 - [roadmap.md](docs/roadmap.md) — what has shipped and what comes next.
+- [stripe_plan.md](docs/stripe_plan.md) — the plan for payments (not built yet): flow, webhook, data model, env vars, tests, open questions.
 - [questions.md](docs/questions.md) — log of unclear points and their answers. Add an entry when something clicks.
 
 Accessibility and performance:

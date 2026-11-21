@@ -23,7 +23,7 @@ Also shipped alongside slices: Vitest unit tests, Playwright E2E, stock enforcem
 ### Must-have before production
 
 - [ ] **Deploy to Vercel + Neon** — project is not yet deployed; env vars, domain (`basehardware.store`), and Vercel project setup needed. Milestone 1
-- [ ] **Payments (Stripe)** — checkout currently creates an order with no payment gate; Stripe hosted checkout or Elements needed before real money can move. Plan it together with the checkout redesign (Milestone 3): Stripe hosted checkout collects the shipping address itself
+- [ ] **Payments (Stripe)** — checkout creates an order with no payment gate; Stripe is needed before real money can move. Designed in [stripe_plan.md](stripe_plan.md) (hosted Checkout, webhook sets `paid`, 30-minute expiry returns stock). Milestone 3, step 6
 - [ ] **Email** — no transactional email at all; minimum: order confirmation and password reset (Resend or Postmark recommended)
 - [ ] **Image uploads** — admin product form accepts a URL string; real uploads via Vercel Blob needed for production
 - [ ] **Error tracking** — no Sentry or equivalent; add from Slice 2 per the original plan
@@ -113,7 +113,7 @@ Order placement used to be one server action from the cart: no address, delivery
 - [x] Decided 2026-11-01: a custom checkout page now, with Stripe added later as a payment step. Accounts stay required; fix the sign-in return path
 - [x] Write an implementation plan from the research findings (the "Prioritized roadmap" in the research report)
 - [x] Build the checkout page to the "Base Hardware - Checkout" Stitch screen: address, delivery method, order summary, place order (done 2026-11-02)
-- [ ] Add Stripe payment (see "Must-have before production"). Open: whether the owner has a Stripe account with test keys. Without keys the payment step can be built but not tried end to end
+- [ ] Add Stripe payment (design and build order in [stripe_plan.md](stripe_plan.md)). Open: whether the owner has a Stripe account with test keys. Without keys the payment step can be built but not tried end to end
 - [x] Add the order confirmation step (a banner on the order page after placing, done 2026-11-02; the confirmation email is Milestone 4)
 - [x] Decided 2026-11-01: drop the "cancel within 1 hour" promise (cancellation does not exist). Regenerate the Stitch checkout screen without it
 

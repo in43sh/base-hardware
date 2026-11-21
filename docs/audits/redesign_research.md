@@ -230,7 +230,10 @@ so the order count is unchanged until "Place order", and the address step is add
 without adding a page for the shopper to find.
 
 Remaining findings: CK-09 (password reset, Milestone 4), and CK-16 (decided: drop the
-cancel promise). Stripe payment (CK-03 finishing) is step 6.
+cancel promise). Stripe payment (CK-03 finishing) is step 6, planned in
+[stripe_plan.md](../stripe_plan.md), which also proposes the answer to question 4 (status
+wording: "Awaiting payment" and "Paid"). Questions 5 (saved addresses) and 6 (free
+shipping threshold) were settled by not building them for now.
 
 ## Verification plan
 
