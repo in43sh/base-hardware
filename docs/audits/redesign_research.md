@@ -260,3 +260,10 @@ shipping threshold) were settled by not building them for now.
 | [checkout-stock-error-desktop.png](redesign_research_assets/checkout-stock-error-desktop.png) | Generic stock error banner |
 | [cart-mobile-375.png](redesign_research_assets/cart-mobile-375.png) | Mobile cart and its small touch targets |
 | [missing-order-default-404-mobile.png](redesign_research_assets/missing-order-default-404-mobile.png) | Default 404 for a missing order |
+| [after-step2-cart-mobile-375.png](redesign_research_assets/after-step2-cart-mobile-375.png) | After step 2: the mobile cart with 44px controls and no sideways scroll |
+| [after-step3-cart-over-stock-warning.png](redesign_research_assets/after-step3-cart-over-stock-warning.png) | After step 3: a cart line over its stock, with the named problem and Checkout disabled |
+| [after-step3-low-stock-product-page.png](redesign_research_assets/after-step3-low-stock-product-page.png) | After step 3: "Only N left" on the product page |
+| [after-step5-checkout-errors-desktop.png](redesign_research_assets/after-step5-checkout-errors-desktop.png) | After step 5: the checkout page after submitting an empty form, with announced errors and focus on the first bad field |
+| [after-step5-checkout-mobile-375.png](redesign_research_assets/after-step5-checkout-mobile-375.png) | After step 5: the checkout page at 375px (the round "N" button is the Next.js dev-tools badge, not part of the app) |
+| [after-step5-order-confirmation-desktop.png](redesign_research_assets/after-step5-order-confirmation-desktop.png) | After step 5: the order page with the confirmation banner, saved address, delivery method and stored totals (an existing order opened with `?placed=1`) |
+| [after-step5-old-order-no-address.png](redesign_research_assets/after-step5-old-order-no-address.png) | After step 5: an order placed before the checkout page, with backfilled subtotal and tax, and "No shipping address was saved" |

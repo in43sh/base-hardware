@@ -149,6 +149,21 @@ protects (hero text back to `gray-500`, `gray-500` back to `#879095`, drawer
 color removed), confirming the matching test failed for the right reason, and
 restoring the file. Clear `.next/dev` before each such run.
 
+**Checkout tests, checked the same way (2026-11-02).** Each row was undone alone, the
+named test was run, and the file was restored.
+
+| What was undone | Test that failed | Why it failed |
+| --- | --- | --- |
+| Express price set to 0 in `lib/pricing.ts` | "choosing Express adds its price to the total" | Expected "$12.99", received "ShippingFree" |
+| `shouldFocusError: false` in `CheckoutForm` | "submitting an empty form announces what is wrong and focuses the first problem" | The full-name field was not focused |
+| The address block hidden on the order page | "placing an order shows a confirmation with the address and totals" | The `address` element was not found |
+| The empty-cart redirect removed from `app/checkout/page.tsx` | "an empty cart sends the shopper back to the cart" | The page stayed on `/checkout` |
+
+Steps 2 to 4 (cart, stock, errors, sign-in return) were checked by the same method
+during their work, but the per-test results were not recorded. Not checked at all: the
+two axe scans of `/checkout` (they pass on a clean page, but nothing was broken on
+purpose to prove they can fail) and the sideways-scroll test.
+
 ---
 
 ## Coverage gaps (from technical_guide.md §9)
