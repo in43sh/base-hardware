@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { slugify, categories } from "@/lib/categories";
+import { slugify, titleChangesSlug, categories } from "@/lib/categories";
 
 describe("slugify", () => {
   it("lowercases and hyphenates", () => {
@@ -19,6 +19,20 @@ describe("slugify", () => {
   it("is idempotent on an already-slugged value", () => {
     const once = slugify("Heating & Cooling");
     expect(slugify(once)).toBe(once);
+  });
+});
+
+describe("titleChangesSlug", () => {
+  it("is false when the title is unchanged", () => {
+    expect(titleChangesSlug("DeWalt 20V Drill", "DeWalt 20V Drill")).toBe(false);
+  });
+
+  it("is false when only case or punctuation changes", () => {
+    expect(titleChangesSlug("DeWalt 20V Drill", "dewalt 20v  drill!")).toBe(false);
+  });
+
+  it("is true when the words change", () => {
+    expect(titleChangesSlug("DeWalt 20V Drill", "DeWalt 20V Drill Kit")).toBe(true);
   });
 });
 

@@ -31,6 +31,10 @@ export const slugify = (s: string): string =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+/** True when editing a title from `oldTitle` to `newTitle` should produce a new slug. */
+export const titleChangesSlug = (oldTitle: string, newTitle: string): boolean =>
+  slugify(oldTitle) !== slugify(newTitle);
+
 export const categories: Category[] = names.map((name) => ({
   name,
   slug: slugify(name),

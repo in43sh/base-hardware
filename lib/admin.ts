@@ -3,7 +3,7 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { products, categories } from "@/db/schema";
 import { auth } from "@/auth";
-import { slugify } from "@/lib/categories";
+import { slugify, titleChangesSlug } from "@/lib/categories";
 import type { ProductValues } from "@/lib/validation";
 
 export async function isAdmin(): Promise<boolean> {
@@ -87,7 +87,13 @@ export async function updateProduct(
   id: number,
   values: ProductValues,
 ): Promise<void> {
-  const slug = await uniqueSlug(values.title, id);
+  // Keep the existing slug unless the title really changed, so editing stock
+  // or price does not break links and bookmarks to /product/<slug>.
+  const current = await getProductById(id);
+  const slug =
+    current && !titleChangesSlug(current.title, values.title)
+      ? current.slug
+      : await uniqueSlug(values.title, id);
   await db
     .update(products)
     .set({

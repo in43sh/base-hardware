@@ -68,7 +68,7 @@ The `@/` alias resolves to the project root, same as in the app. No setup file i
 
 ## E2E tests — Playwright
 
-**Location:** `tests/e2e/` (`shop.spec.ts`, `accessibility.spec.ts`, `keyboard.spec.ts`, `cart.spec.ts`, `auth-forms.spec.ts`, `stock-and-errors.spec.ts`, `signin-return.spec.ts`, `checkout.spec.ts`)
+**Location:** `tests/e2e/` (`shop.spec.ts`, `accessibility.spec.ts`, `keyboard.spec.ts`, `cart.spec.ts`, `auth-forms.spec.ts`, `stock-and-errors.spec.ts`, `signin-return.spec.ts`, `checkout.spec.ts`, `admin-slug.spec.ts`)
 
 **Config:** [playwright.config.ts](../playwright.config.ts) — Chromium only, fully serial (`fullyParallel: false`, `workers: 1`, because several specs share the demo customer's cart), zero retries, auto-starts `npm run dev` on `localhost:3000` (`reuseExistingServer: true`).
 
