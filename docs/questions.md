@@ -72,3 +72,13 @@ Format:
 **Where to look:** [db/schema.ts](db/schema.ts) numeric columns, technical_guide.md §14 pattern 5
 
 ---
+
+## Q: Why are the checkout address fields separate columns on `orders` instead of one JSON field?
+
+**Confused by:** A JSON column would let us add address fields later without a migration, and it keeps the table narrower. It was not obvious which is better.
+
+**Answer:** Separate columns, with a `shipping_` prefix. The database can enforce the shape, queries by city or state stay simple, Drizzle gives a typed result, and the address has a small, well-known shape. JSON cannot require fields inside it, makes filtering awkward, and lets old orders end up with different shapes. The migration cost of a later field is small: an optional column is a one-line, safe migration that leaves old orders alone, and the real work of a new field (form, validation, display) is the same either way. We settled the full field list now (name, two street lines, city, state, ZIP, country, optional phone) to avoid most later changes. The columns are nullable because orders placed before the checkout page have no address; the form requires them for new orders. A billing address will not need its own columns, because Stripe collects it, and saved addresses (open question 5 in the research report) would be a separate table, since the order keeps a frozen copy.
+
+**Where to look:** [db/schema.ts](db/schema.ts) `orders`, [technical_guide.md §5.6](technical_guide.md), [audits/redesign_research.md](audits/redesign_research.md) (step 5 decisions)
+
+---

@@ -159,7 +159,7 @@ These paths exist in code but have zero test coverage. They're the highest-value
 | ---- | ---- | ------------ |
 | Sign in / sign up / session | E2E | Credentials flow; duplicate email rejection; redirect after login |
 | Guest → user cart merge | E2E | Add as guest, sign in, verify items carry over |
-| `placeOrder` out-of-stock rollback | Integration | The happy path and the checkout form are covered by `checkout.spec.ts`; the rollback when stock runs short is not, because it needs two concurrent checkouts or a stock change in the database |
+| `placeOrder` out-of-stock rollback | Integration | The happy path and the checkout form are covered by `checkout.spec.ts`; the rollback when stock runs short is not, because it needs two concurrent checkouts or a stock change in the database. Left out on purpose in step 5 so the e2e suite does not write stock changes beyond the one unit the place-order test takes; an integration test against a Neon branch is the right home |
 | Order history, ownership check | E2E | `/account/orders/:id` visible to owner, 404 for other user |
 | Reviews + rating recompute | E2E | Purchase gate (non-buyer sees no form); submit updates star rating |
 | Admin CRUD + `isAdmin` guard | E2E | Create/edit/delete product; non-admin redirected to `/` |

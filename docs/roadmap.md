@@ -93,7 +93,7 @@ The plan from here, in order. Each milestone ships on its own. Small follow-ups 
 - [ ] Register `basehardware.store`
 - [ ] Create the Vercel project and Neon integration, and set the env vars
 - [ ] Set `NEXT_PUBLIC_SITE_URL=https://basehardware.store` so OpenGraph, canonical URLs, sitemap, and JSON-LD resolve to absolute production URLs (it falls back to `http://localhost:3000` in `lib/site.ts`)
-- [ ] In Stitch, delete the three old Homebuzz screens and rename the project and the checkout screen
+- [ ] In Stitch, delete the three old Homebuzz screens and rename the project and the checkout screen. The checkout screen is also out of date against the built page: it still shows the "cancel within 1 hour" line, and the product mockup still says "Free shipping over $75" (Standard is free for all orders). Regenerate them from the built pages, or leave them as historical
 
 Done when: the site loads on `https://basehardware.store` and the sitemap and OpenGraph URLs use that domain.
 
@@ -113,7 +113,7 @@ Order placement used to be one server action from the cart: no address, delivery
 - [x] Decided 2026-11-01: a custom checkout page now, with Stripe added later as a payment step. Accounts stay required; fix the sign-in return path
 - [x] Write an implementation plan from the research findings (the "Prioritized roadmap" in the research report)
 - [x] Build the checkout page to the "Base Hardware - Checkout" Stitch screen: address, delivery method, order summary, place order (done 2026-11-02)
-- [ ] Add Stripe payment (see "Must-have before production")
+- [ ] Add Stripe payment (see "Must-have before production"). Open: whether the owner has a Stripe account with test keys. Without keys the payment step can be built but not tried end to end
 - [x] Add the order confirmation step (a banner on the order page after placing, done 2026-11-02; the confirmation email is Milestone 4)
 - [x] Decided 2026-11-01: drop the "cancel within 1 hour" promise (cancellation does not exist). Regenerate the Stitch checkout screen without it
 
