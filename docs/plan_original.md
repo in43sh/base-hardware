@@ -22,7 +22,7 @@ architecture (§4) + scope (§5).** Defaults stand if you don't object.
 
 ## 1. What exists today
 
-Three generations of the project live in `homebuzz-everything/`:
+When this plan was written, three generations of the project lived in `homebuzz-everything/`. They are still there as an archive. The rebuild described here is now the separate `base-hardware` folder next to it:
 
 | Repo | Stack | State | Useful for |
 | ---- | ----- | ----- | ---------- |

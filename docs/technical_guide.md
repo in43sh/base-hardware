@@ -351,7 +351,7 @@ Lives in [lib/cart.ts](lib/cart.ts); mutations exposed via [app/actions/cart.ts]
 
 ### 6.5 Admin product management
 
-[lib/admin.ts](lib/admin.ts) (server-only) + [app/actions/admin.ts](app/actions/admin.ts). `isAdmin()` gates every operation. `createProduct`/`updateProduct` derive a unique slug via `uniqueSlug` (slugify the title; on collision append the last 5 digits of `Date.now()`). `saveProductAction` validates with `productSchema`, then `revalidateCatalog()` busts `/admin/products`, `/store`, and `/`. `deleteProductAction` catches the `order_items` FK violation and returns a friendly error for products that have been ordered (§15). There is no admin order or user management — products only.
+[lib/admin.ts](lib/admin.ts) (server-only) + [app/actions/admin.ts](app/actions/admin.ts). `isAdmin()` gates every operation. `createProduct` derives a unique slug via `uniqueSlug` (slugify the title; on collision append the last 5 digits of `Date.now()`). `updateProduct` keeps the stored slug unless `titleChangesSlug` says the title changed, so editing stock or price never breaks `/product/:slug` links; a real title change generates a new slug and the old URL 404s (no redirect yet). `saveProductAction` validates with `productSchema`, then `revalidateCatalog()` busts `/admin/products`, `/store`, and `/`. `deleteProductAction` catches the `order_items` FK violation and returns a friendly error for products that have been ordered (§15). There is no admin order or user management — products only.
 
 > See [walkthrough.md — Admin saves a product](walkthrough.md) for an end-to-end trace.
 
